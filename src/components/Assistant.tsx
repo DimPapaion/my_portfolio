@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { answerPortfolioQuestion, type Action } from "@/lib/portfolio-brain";
+import { answerPortfolioQuestion, type Action, QUICK_ACTIONS } from "@/lib/portfolio-brain";
 import { topSnippets } from "@/lib/search";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import { links } from "@/data/links";
@@ -28,12 +28,10 @@ export default function Assistant() {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    {
-      role: "assistant",
-      text:
-        "Hi! Ask about my projects, publications, experience — or say ‘open CV’.",
-    },
-  ]);
+  { role: "assistant",
+    text: "Hi! Ask about my projects, publications, experience — or use quick actions below (/cv, /projects)." }
+]);
+
   const [input, setInput] = useState("");
   const [llm, setLlm] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -186,18 +184,26 @@ export default function Assistant() {
               </div>
             ))}
           </div>
-
+          <div className="px-4 pt-3 pb-1 flex flex-wrap gap-2">
+            {QUICK_ACTIONS.map((qa) => (
+              <button
+                key={qa.label}
+                onClick={() => runAction(qa.action)}
+                className="rounded-full border px-3 py-1 text-xs transition
+                          hover:bg-black hover:text-white
+                          dark:hover:bg-white dark:hover:text-black"
+              >
+                {qa.label}
+              </button>
+            ))}
+          </div>
           <div className="p-3 border-t border-black/10 dark:border-white/10">
             <div className="flex items-center gap-2">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !busy && send()}
-                placeholder={
-                  llm
-                    ? "Ask about my work…"
-                    : "LLM off — try: open CV, show projects…"
-                }
+                placeholder={ llm ? "Ask about my work… (/cv, /projects)" : "LLM off — try: /cv, /projects, /experience" }
                 className="flex-1 rounded-xl border px-3 py-2 text-sm
                            bg-white dark:bg-white/5 dark:border-white/10 outline-none
                            focus:ring-2 ring-sky-400/50"

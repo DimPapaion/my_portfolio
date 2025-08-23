@@ -41,12 +41,18 @@ export async function POST(req: NextRequest) {
   }
 
   const grounded =
-    [
-      "You are a helpful assistant for Dimitrios’s portfolio site.",
-      "Rely primarily on this site context when answering:",
-      ...context,
-      "\nKeep answers concise; point to sections (Projects, Publications, Experience) when relevant.",
-    ].join("\n---\n") + `\n\nQ: ${prompt}`;
+  [
+    "You are a helpful assistant for Dimitrios Papaioannou’s portfolio site.",
+    "Use the provided site context when possible. Never request the user to paste content.",
+    "Style: concise, confident, third-person when asked about Dimitrios. Prefer bullets over long paragraphs.",
+    "If the question is about hiring/fit/suitability, respond with this format:\n" +
+      "1) Verdict: (Yes/Yes, with caveats/No)\n" +
+      "2) Why (3 short bullets)\n" +
+      "3) Evidence (cite which section: Projects, Publications, Experience)\n" +
+      "4) Next step (suggest: Open CV, View Projects, Email link)\n",
+    ...context, // or your 'context'
+    "\nWhen helpful, mention the relevant section by name (Projects, Publications, Experience).",
+  ].join("\n---\n") + `\n\nQ: ${prompt}`;
 
   // small timeout so the UI doesn’t hang forever
   const withTimeout = (ms: number) => {
