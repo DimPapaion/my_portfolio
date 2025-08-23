@@ -6,9 +6,19 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Dimitrios Papaioannou — Portfolio",
-  description: "Machine Learning Engineer & AI Researcher",
+  description: "Machine Learning Engineer & AI Researcher (CV, projects, publications).",
+  metadataBase: new URL("https://dimpap.vercel.app"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Dimitrios Papaioannou — Portfolio",
+    description: "Machine Learning Engineer & AI Researcher",
+    url: "https://dimpap.vercel.app",
+    siteName: "Dimitrios Papaioannou",
+    images: [{ url: "/me.png", width: 1200, height: 630 }],
+    locale: "en_US",
+    type: "website",
+  },
 };
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>

@@ -7,82 +7,61 @@ import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
 import { experience } from "@/data/experience";
 import ProjectCard from "@/components/ProjectCard";
+// (optional) import BackToTop below after you create it
+import BackToTop from "@/components/BackToTop";
+import DotNav from "@/components/DotNav";
 
 export default function Home() {
   return (
-    
-
-    <main>
-
-      
-      {/* Hero */}
+    <main className="h-[100svh] overflow-y-auto snap-y snap-mandatory scroll-smooth">
+      {/* HERO (full-screen, snap) */}
       <motion.section
-        className="max-w-5xl mx-auto px-6 pt-16 pb-10"
+        id="hero"
+        className="relative snap-start min-h-[100svh] flex items-center"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <motion.p
-          className="text-xs uppercase tracking-widest text-gray-500"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05, duration: 0.5 }}
-        >
-          Portfolio
-        </motion.p>
+        {/* soft radial background */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.08),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.12),transparent_60%)]" />
 
-        <motion.h1
-          className="mt-2 text-4xl md:text-5xl font-bold"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, duration: 0.55 }}
-        >
-          {links.name}
-        </motion.h1>
+        <div className="max-w-5xl mx-auto px-6">
+          <p className="text-xs uppercase tracking-widest text-gray-500">Portfolio</p>
 
-        <motion.p
-          className="mt-3 text-lg text-gray-600"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.5 }}
-        >
-          {links.title}
-        </motion.p>
+          <motion.h1
+            className="mt-3 text-5xl md:text-6xl font-bold bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-indigo-400 dark:to-emerald-400"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.12, duration: 0.55 }}
+          >
+            {links.name}
+          </motion.h1>
 
-        <motion.p
-          className="mt-1 text-sm text-gray-500"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.24, duration: 0.5 }}
-        >
-          {links.location}
-        </motion.p>
+          <motion.p
+            className="mt-4 text-xl text-gray-600 dark:text-neutral-300 max-w-2xl"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.5 }}
+          >
+            {links.title}
+          </motion.p>
 
-        <motion.div
-          className="mt-6 flex flex-wrap gap-3"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <a href="/cv.pdf" className="px-4 py-2 rounded-lg bg-black text-white">
-            Download CV
-          </a>
-          <a className="px-4 py-2 rounded-lg border" href={links.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a className="px-4 py-2 rounded-lg border" href={links.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-          <a className="px-4 py-2 rounded-lg border" href={links.scholar} target="_blank" rel="noreferrer">
-            Google Scholar
-          </a>
-          <a className="px-4 py-2 rounded-lg border" href={`mailto:${links.email}`}>
-            Email
-          </a>
-        </motion.div>
+          <motion.div
+            className="mt-8 flex flex-wrap gap-3"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <a href="/cv.pdf" className="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black">Download CV</a>
+            <a className="px-4 py-2 rounded-lg border" href={links.github} target="_blank" rel="noreferrer">GitHub</a>
+            <a className="px-4 py-2 rounded-lg border" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="px-4 py-2 rounded-lg border" href={links.scholar} target="_blank" rel="noreferrer">Google Scholar</a>
+            <a className="px-4 py-2 rounded-lg border" href={`mailto:${links.email}`}>Email</a>
+          </motion.div>
+        </div>
       </motion.section>
 
-      {/* Projects */}
+      {/* PROJECTS — full-screen panel */}
       <Section id="projects" title="Projects">
         <div className="grid md:grid-cols-2 gap-5">
           {projects.map((p) => (
@@ -101,8 +80,7 @@ export default function Home() {
         </div>
       </Section>
 
-
-      {/* Publications */}
+      {/* PUBLICATIONS — full-screen panel */}
       <Section id="publications" title="Publications">
         <ul className="list-disc pl-6 space-y-2">
           {publications.map((pub) => (
@@ -114,7 +92,7 @@ export default function Home() {
               transition={{ duration: 0.4 }}
             >
               <span className="font-medium">{pub.title}</span>{" — "}
-              <span className="text-gray-700">
+              <span className="text-gray-700 dark:text-neutral-300">
                 {pub.venue} ({pub.year})
               </span>
               {pub.url && (
@@ -130,7 +108,7 @@ export default function Home() {
         </ul>
       </Section>
 
-      {/* Experience */}
+      {/* EXPERIENCE — full-screen panel */}
       <Section id="experience" title="Experience">
         <div className="space-y-6">
           {experience.map((r) => (
@@ -148,32 +126,27 @@ export default function Home() {
                 </h3>
                 <span className="text-sm text-gray-500">{r.period}</span>
               </div>
-              <ul className="mt-2 list-disc pl-6 space-y-1 text-gray-700">
-                {r.bullets.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
+              <ul className="mt-2 list-disc pl-6 space-y-1 text-gray-700 dark:text-neutral-300">
+                {r.bullets.map((b, i) => <li key={i}>{b}</li>)}
               </ul>
             </motion.div>
           ))}
         </div>
       </Section>
 
-      {/* Contact */}
+      {/* CONTACT — full-screen panel */}
       <Section id="contact" title="Contact">
         <p>
           Email me at{" "}
-          <a className="underline" href={`mailto:${links.email}`}>
-            {links.email}
-          </a>{" "}
+          <a className="underline" href={`mailto:${links.email}`}>{links.email}</a>{" "}
           or connect via{" "}
-          <a className="underline" href={links.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-          .
+          <a className="underline" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>.
         </p>
       </Section>
+
+      {/* Optional: floating back-to-top button */}
+      <BackToTop />
+      <DotNav />
     </main>
   );
-
-
 }

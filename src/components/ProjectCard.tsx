@@ -4,7 +4,7 @@ import type { Project } from "@/data/projects";
 
 export default function ProjectCard({ p }: { p: Project }) {
   return (
-    <div className="rounded-2xl border p-5 shadow-sm">
+    <div className="rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow">
       <h3 className="text-lg font-semibold">{p.title}</h3>
       <p className="mt-2 text-sm text-gray-700">{p.summary}</p>
       <div className="mt-3 flex flex-wrap gap-2">
