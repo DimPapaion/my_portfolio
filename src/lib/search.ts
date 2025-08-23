@@ -1,89 +1,176 @@
-import MiniSearch from "minisearch";
-import { experience } from "@/data/experience";
+// src/lib/search.ts
+import MiniSearch, { type SearchResult } from "minisearch";
+import { links } from "@/data/links";
 import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
-import { links } from "@/data/links";
+import { experience } from "@/data/experience";
 
-type Doc = { id: string; title: string; body: string; section: string; url?: string };
+type Doc = {
+  id: string;
+  title: string;
+  body: string;
+  section: "links" | "about" | "projects" | "publications" | "experience";
+  url?: string;
+};
 
-let mini: MiniSearch<Doc> | null = null;
+// Minimal shapes so we don't rely on external types
+type ProjectLike = {
+  title: string;
+  url?: string;
+  summary?: string;
+  description?: string;
+  tags?: string[];
+};
 
-function docsFromSite(): Doc[] {
-  const docs: Doc[] = [];
+type PublicationLike = {
+  title: string;
+  year?: number | string;
+  venue?: string;
+  url?: string;
+};
 
-  // Experience roles
-  for (const r of experience) {
-    docs.push({
-      id: `exp-${r.org}-${r.title}`,
-      title: `${r.title} — ${r.org}`,
-      body: [r.period, ...(r.bullets ?? [])].join(" "),
-      section: "experience",
-    });
-  }
+type RoleLike = {
+  title: string;
+  org: string;
+  period: string;
+  bullets?: string[];
+};
 
-  // Projects
-  // Projects (tolerant to missing fields like tags/summary/description)
-    type ProjectLike = {
-    title: string;
-    summary?: string;
-    description?: string;
-    tags?: string[];
-    url?: string;
-    };
-
-    const projs = projects as unknown as ProjectLike[];
-
-    for (const p of projs) {
-    const tags = Array.isArray(p.tags) ? p.tags.join(" ") : "";
-    const summary = typeof p.summary === "string" ? p.summary : "";
-    const description = typeof p.description === "string" ? p.description : "";
-
-    docs.push({
-        id: `proj-${p.title}`,
-        title: p.title,
-        body: [summary, tags, description].filter(Boolean).join(" "),
-        section: "projects",
-        url: p.url,
-    });
-    }
-
-
-  // Publications
-  for (const pub of publications) {
-    docs.push({
-      id: `pub-${pub.title}`,
-      title: `${pub.title} (${pub.year})`,
-      body: `${pub.venue ?? ""} ${pub.url ?? ""}`,
-      section: "publications",
-      url: pub.url,
-    });
-  }
-
-  // Quick “About”/links
-  docs.push({
-    id: "about-links",
-    title: "Links",
-    body: `Email: ${links.email} GitHub: ${links.github} LinkedIn: ${links.linkedin} Scholar: ${links.scholar}`,
-    section: "about",
-  });
-
-  return docs;
+function slug(s?: string) {
+  return (s ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
 }
 
-export function buildIndex() {
-  if (mini) return mini;
-  mini = new MiniSearch<Doc>({
-    fields: ["title", "body"],
+// Ensure document IDs are globally unique
+const seen = new Set<string>();
+function uniq(base: string) {
+  let id = base;
+  let n = 1;
+  while (seen.has(id)) id = `${base}-${n++}`;
+  seen.add(id);
+  return id;
+}
+
+let _index: MiniSearch<Doc> | null = null;
+let _docsById: Map<string, Doc> | null = null;
+
+export function buildIndex(): MiniSearch<Doc> {
+  const ms = new MiniSearch<Doc>({
+    idField: "id",
+    fields: ["title", "body", "section"],
     storeFields: ["title", "body", "section", "url"],
     searchOptions: { boost: { title: 2 } },
   });
-  mini.addAll(docsFromSite());
-  return mini;
+
+  const docs: Doc[] = [];
+  const byId = new Map<string, Doc>();
+
+  // LINKS
+  const linksDoc: Doc = {
+    id: uniq("links"),
+    title: "Links",
+    body: [
+      links.name,
+      links.title,
+      links.email ?? "",
+      links.linkedin ?? "",
+      links.github ?? "",
+    ].join(" "),
+    section: "links",
+  };
+  docs.push(linksDoc);
+  byId.set(linksDoc.id, linksDoc);
+
+  // Short bio so vague queries match
+  const bioDoc: Doc = {
+    id: uniq("about-bio"),
+    title: "About Dimitrios",
+    body:
+      "Machine Learning Engineer / AI Researcher focusing on computer vision and production ML. " +
+      "Bridging research with scalable implementations. Interests: model efficiency, edge inference, reliable evaluation.",
+    section: "about",
+  };
+  docs.push(bioDoc);
+  byId.set(bioDoc.id, bioDoc);
+
+  // PROJECTS
+  const projs = projects as unknown as ProjectLike[];
+  projs.forEach((p, i) => {
+    const tags = Array.isArray(p.tags) ? p.tags.join(" ") : "";
+    const summary = p.summary ?? "";
+    const description = p.description ?? "";
+    const d: Doc = {
+      id: uniq(`proj-${slug(p.title)}-${i}`),
+      title: p.title ?? "Project",
+      body: [summary, tags, description].filter(Boolean).join(" "),
+      section: "projects",
+      url: p.url,
+    };
+    docs.push(d);
+    byId.set(d.id, d);
+  });
+
+  // PUBLICATIONS
+  const pubs = publications as unknown as PublicationLike[];
+  pubs.forEach((pub, i) => {
+    const d: Doc = {
+      id: uniq(`pub-${slug(pub.title)}-${pub.year ?? "y"}-${i}`,
+      ),
+      title: pub.title ?? "Publication",
+      body: `${pub.venue ?? ""} ${pub.year ?? ""}`.trim(),
+      section: "publications",
+      url: pub.url,
+    };
+    docs.push(d);
+    byId.set(d.id, d);
+  });
+
+  // EXPERIENCE (include index to avoid duplicates)
+  const roles = experience as unknown as RoleLike[];
+  roles.forEach((r, i) => {
+    const bullets = Array.isArray(r.bullets) ? r.bullets.join(" ") : "";
+    const d: Doc = {
+      id: uniq(`exp-${slug(r.org)}-${slug(r.title)}-${i}`),
+      title: `${r.title} — ${r.org}`,
+      body: `${r.period} ${bullets}`.trim(),
+      section: "experience",
+    };
+    docs.push(d);
+    byId.set(d.id, d);
+  });
+
+  ms.addAll(docs);
+  _docsById = byId;
+  return ms;
 }
 
 export function topSnippets(query: string, k = 3): string[] {
-  const ms = buildIndex();
-  return ms.search(query).slice(0, k).map(r =>
-    `${r.section.toUpperCase()}: ${r.title}\n${(r.body ?? "").slice(0, 600)}`
-  );
+  try {
+    if (!_index) _index = buildIndex();
+    if (!_docsById) _docsById = new Map<string, Doc>();
+    if (!query.trim()) return [];
+
+    const results = _index.search(query, {
+      prefix: true,
+      fuzzy: 0.2,
+      combineWith: "AND",
+    }) as SearchResult[];
+
+    return results.slice(0, k).map((r) => {
+      const d = _docsById!.get(String(r.id));
+      if (!d) return String(r.id);
+      const parts: string[] = [];
+      if (d.title) parts.push(d.title);
+      if (d.section) parts.push(d.section);
+      if (d.body) parts.push(d.body);
+      return parts.join(" — ");
+    });
+  } catch (e) {
+    // Never break the assistant if search chokes
+    console.error("MiniSearch error:", e);
+    return [];
+  }
 }
