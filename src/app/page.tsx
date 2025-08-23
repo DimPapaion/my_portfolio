@@ -19,7 +19,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import Contact from "@/components/Contact";
 import Skills from "@/components/Skills";
 import SocialLinks from "@/components/SocialLinks";
-
+import Assistant from "@/components/Assistant";
 
 const sectionLinks = [
   { id: "about", label: "About" },
@@ -199,6 +199,7 @@ export default function Home() {
       <Contact />
       <BackToTop/>
       <DotNav/>
+      <Assistant/>
     </main>
   );
 }
