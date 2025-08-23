@@ -1,22 +1,24 @@
 "use client";
 
+import type { IconType } from "react-icons";
 import { SiGithub, SiLinkedin, SiGooglescholar } from "react-icons/si";
 import { MdEmail } from "react-icons/md";
 import { links } from "@/data/links";
 
+type LinkItem = { href: string; label: string; Icon: IconType };
+
 export default function SocialLinks({
   className = "",
-  size = 22,                    // icon size
-}: {
-  className?: string;
-  size?: number;
-}) {
-  const items = [
-    links.github   && { href: links.github,   label: "GitHub",         Icon: SiGithub },
-    links.linkedin && { href: links.linkedin, label: "LinkedIn",       Icon: SiLinkedin },
-    links.scholar  && { href: links.scholar,  label: "Google Scholar", Icon: SiGooglescholar },
-    links.email    && { href: `mailto:${links.email}`, label: "Email", Icon: MdEmail },
-  ].filter(Boolean) as { href: string; label: string; Icon: any }[];
+  size = 22,
+}: { className?: string; size?: number }) {
+  const raw: Array<LinkItem | undefined> = [
+    links.github   ? { href: links.github,   label: "GitHub",         Icon: SiGithub } : undefined,
+    links.linkedin ? { href: links.linkedin, label: "LinkedIn",       Icon: SiLinkedin } : undefined,
+    links.scholar  ? { href: links.scholar,  label: "Google Scholar", Icon: SiGooglescholar } : undefined,
+    links.email    ? { href: `mailto:${links.email}`, label: "Email", Icon: MdEmail } : undefined,
+  ];
+
+  const items: LinkItem[] = raw.filter((x): x is LinkItem => Boolean(x));
 
   return (
     <nav className={`flex items-center gap-3 ${className}`}>

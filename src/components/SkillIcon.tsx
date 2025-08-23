@@ -3,7 +3,7 @@
 import type { IconType } from "react-icons";
 import {
   SiPython, SiPytorch, SiTensorflow, SiOpencv,
-  SiDocker, SiAmazonaws, SiGooglecloud, SiGit,
+  SiDocker, SiAmazon, SiGooglecloud, SiGit,
   SiNumpy, SiPandas, SiScikitlearn, SiOnnx, SiNvidia
 } from "react-icons/si";
 
@@ -14,6 +14,7 @@ const ICONS: Record<string, IconType> = {
   tensorflow: SiTensorflow,
   opencv: SiOpencv,
   docker: SiDocker,
+  aws: SiAmazon,
   gcp: SiGooglecloud,
   git: SiGit,
   numpy: SiNumpy,
