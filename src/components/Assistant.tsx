@@ -5,7 +5,10 @@ import { createPortal } from "react-dom";
 import { answerPortfolioQuestion, type Action } from "@/lib/portfolio-brain";
 import { topSnippets } from "@/lib/search";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
-
+import { links } from "@/data/links";
+import { experience } from "@/data/experience";
+import { projects } from "@/data/projects";
+import { publications } from "@/data/publications";
 type ApiAssistantResponse = { text?: string; error?: string };
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -45,27 +48,42 @@ export default function Assistant() {
   }, [messages, open]);
 
   async function send() {
-    const q = input.trim();
-    if (!q) return;
-    setMessages((m) => [...m, { role: "user", text: q }]);
-    setInput("");
+  const q = input.trim();
+  if (!q) return;
+  setMessages((m) => [...m, { role: "user", text: q }]);
+  setInput("");
 
-    if (!llm) {
-      const ans = answerPortfolioQuestion(q);
-      setMessages((m) => [...m, { role: "assistant", text: ans.text }]);
-      runAction(ans.action);
-      return;
-    }
+  if (!llm) {
+    const ans = answerPortfolioQuestion(q);
+    setMessages((m) => [...m, { role: "assistant", text: ans.text }]);
+    runAction(ans.action);
+    return;
+  }
 
-    setBusy(true);
-    try {
-      const snippets = topSnippets(q, 3);
-      const r = await fetch("/api/assistant", {
+  setBusy(true);
+  try {
+    // 1) Try Lite RAG first
+    const snippets = topSnippets(q, 3);
+
+    // 2) Guaranteed base context (always available)
+    const baseCtx = [
+      `${links.name} — ${links.title}. Email: ${links.email}.`,
+      `Experience: ${experience.map(r => `${r.title} at ${r.org} (${r.period})`).join(" | ")}`,
+      `Projects: ${projects.map(p => p.title).join(" | ")}`,
+      `Publications: ${publications.length} items` +
+        (publications.length ? `: ${publications.slice(0, 5).map(p => `${p.title} (${p.year})`).join(" | ")}` : ""),
+    ];
+
+    // Use RAG snippets if we got any; otherwise fall back to base context
+    const context = snippets.length ? snippets : baseCtx;
+
+    const r = await fetch("/api/assistant", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: q, context: snippets }),
+      body: JSON.stringify({ prompt: q, context }),
     });
 
+    type ApiAssistantResponse = { text?: string; error?: string };
     let j: ApiAssistantResponse | null = null;
     try {
       j = (await r.json()) as ApiAssistantResponse;
@@ -86,18 +104,18 @@ export default function Assistant() {
     } else {
       setMessages((m) => [...m, { role: "assistant", text: j.text ?? "" }]);
     }
-
-    } catch {
-      const ans = answerPortfolioQuestion(q);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", text: "Network error. " + ans.text },
-      ]);
-      runAction(ans.action);
-    } finally {
-      setBusy(false);
-    }
+  } catch {
+    const ans = answerPortfolioQuestion(q);
+    setMessages((m) => [
+      ...m,
+      { role: "assistant", text: "Network error. " + ans.text },
+    ]);
+    runAction(ans.action);
+  } finally {
+    setBusy(false);
   }
+}
+
 
   if (!mounted) return null;
 
