@@ -1,67 +1,141 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Section from "@/components/Section";
+import ProjectCard from "@/components/ProjectCard";
 import { links } from "@/data/links";
 import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
 import { experience } from "@/data/experience";
-import ProjectCard from "@/components/ProjectCard";
-// (optional) import BackToTop below after you create it
-import BackToTop from "@/components/BackToTop";
+import BackToTop from "@/components/BackToTop"; 
 import DotNav from "@/components/DotNav";
+import Typewriter from "@/components/Typewriter";
+import LetterReveal from "@/components/LetterReveal";
+import HeroBG from "@/components/HeroBG";
+import ConstellationBG from "@/components/ConstellationBG";
+import About from "@/components/About";
+import ExperienceCard from "@/components/ExperienceCard";
+
+const sectionLinks = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "publications", label: "Publications" },
+  { id: "experience", label: "Experience" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function Home() {
   return (
     <main className="h-[100svh] overflow-y-auto snap-y snap-mandatory scroll-smooth">
-      {/* HERO (full-screen, snap) */}
+      {/* HERO (full-screen) */}
       <motion.section
-        id="hero"
-        className="relative snap-start min-h-[100svh] flex items-center"
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        {/* soft radial background */}
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.08),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.12),transparent_60%)]" />
+      id="hero"
+      className="relative snap-center min-h-[100svh] flex items-center"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      {/* keep your animated background here if you added one, e.g. <HeroBG /> */}
+      <ConstellationBG density={1.5} speed={1.9} connectDistance={170} dotRadius={2} lineWidth={1} />
 
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-gray-500">Portfolio</p>
 
-          <motion.h1
-            className="mt-3 text-5xl md:text-6xl font-bold bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-indigo-400 dark:to-emerald-400"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, duration: 0.55 }}
-          >
-            {links.name}
-          </motion.h1>
+       <div className="relative z-10 max-w-5xl mx-auto px-6 w-full flex flex-col items-center text-center">
+        {/* avatar */}
+        <Image
+          src="/me.png"
+          alt={links.name}
+          width={240}
+          height={240}
+          className="rounded-full ring-1 ring-black/5 dark:ring-white/10"
+          priority
+        />
 
-          <motion.p
-            className="mt-4 text-xl text-gray-600 dark:text-neutral-300 max-w-2xl"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18, duration: 0.5 }}
-          >
-            {links.title}
-          </motion.p>
+        {/* small uppercase role (like the screenshot) */}
+        <p className="mt-6 text-[1.5rem] md:text-sm uppercase tracking-[0.6em] text-gray-500">
+          {links.title}
+        </p>
 
-          <motion.div
-            className="mt-8 flex flex-wrap gap-3"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <a href="/cv.pdf" className="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black">Download CV</a>
-            <a className="px-4 py-2 rounded-lg border" href={links.github} target="_blank" rel="noreferrer">GitHub</a>
-            <a className="px-4 py-2 rounded-lg border" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-            <a className="px-4 py-2 rounded-lg border" href={links.scholar} target="_blank" rel="noreferrer">Google Scholar</a>
-            <a className="px-4 py-2 rounded-lg border" href={`mailto:${links.email}`}>Email</a>
-          </motion.div>
+        {/* BIG rotating typewriter + teal caret */}
+        <div className="mt-4 flex items-baseline justify-center">
+          <Typewriter
+            lines={[
+              `Hi, my name is ${links.name}.`,
+              "I love coffee.",
+              "Computer Vision is my passion.",
+              "I love hiking.",
+            ]}
+            //  className="text-5xl md:text-7xl font-extrabold tracking-tight
+            //  !text-gray-900 dark:!text-gray-200 !opacity-100"
+            typingSpeed={70}     // slower typing
+            deletingSpeed={50}   // slower deleting
+            pauseMs={1700} 
+            className="text-5xl md:text-7xl font-extrabold tracking-tight !text-black dark:!text-gray-500 !opacity-100"
+            />
+            <span
+              aria-hidden
+              className="ml-2 inline-block h-[1em] w-[3px] !bg-black dark:!bg-gray-300
+                        align-bottom [animation:caret-blink_1s_steps(1,end)_infinite]"
+          />
         </div>
-      </motion.section>
 
-      {/* PROJECTS — full-screen panel */}
+        {/* section chips (uppercase + rectangular hover) */}
+        <nav
+          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+          aria-label="Section quick links"
+        >
+          {[
+            { id: "about", label: "ABOUT" },
+            { id: "projects", label: "PROJECTS" },
+            { id: "publications", label: "PUBLICATIONS" },
+            { id: "experience", label: "EXPERIENCE" },
+            { id: "contact", label: "CONTACT" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() =>
+                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "center" })
+              }
+              className="px-5 py-2 rounded-full border border-transparent
+           text-[1.1rem] tracking-[0.35em]!text-gray-200 dark:!text-gray-500
+           hover:bg-sky-100 hover:text-sky-800 hover:border-sky-400
+           dark:hover:bg-sky-500/15 dark:hover:text-sky-200 dark:hover:border-sky-400
+           transition shadow-none hover:shadow-sm focus-visible:outline-none
+           focus-visible:ring-2 focus-visible:ring-sky-400/60"
+          //     className="px-5 py-2 rounded-full border border-transparent
+          //  text-[0.8rem] tracking-[0.35em]
+          //  !text-gray-200 dark:!text-gray-500
+          //  hover:bg-gray-400 hover:text-white hover:border-gray-700
+          //  dark:hover:bg-gray-200 dark:hover:text-gray-900 dark:hover:border-gray-200
+          //  transition shadow-none hover:shadow-sm focus-visible:outline-none
+          //  focus-visible:ring-2 focus-visible:ring-gray-800/40
+          //  dark:focus-visible:ring-gray-200/40"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+      </div>
+    </motion.section>
+
+    <About />
+          {/* Work Experience */}
+    <Section
+        id="experience"
+        title="Experience"
+        className="items-center"            // ← center vertically
+        containerClassName="max-w-none px-6 md:px-8" 
+        titleClassName="text-lg md:text-xl mb-8"
+      >
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {experience.map((r, i) => (
+            <ExperienceCard key={`${r.title}-${r.org}-${r.period}`} role={r} index={i} />
+          ))}
+        </div>
+      </Section>
+
+
+      {/* PROJECTS */}
       <Section id="projects" title="Projects">
         <div className="grid md:grid-cols-2 gap-5">
           {projects.map((p) => (
@@ -80,7 +154,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* PUBLICATIONS — full-screen panel */}
+      {/* PUBLICATIONS */}
       <Section id="publications" title="Publications">
         <ul className="list-disc pl-6 space-y-2">
           {publications.map((pub) => (
@@ -108,33 +182,9 @@ export default function Home() {
         </ul>
       </Section>
 
-      {/* EXPERIENCE — full-screen panel */}
-      <Section id="experience" title="Experience">
-        <div className="space-y-6">
-          {experience.map((r) => (
-            <motion.div
-              key={`${r.title}-${r.org}-${r.period}`}
-              className="border rounded-2xl p-5"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45 }}
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg font-semibold">
-                  {r.title} — {r.org}
-                </h3>
-                <span className="text-sm text-gray-500">{r.period}</span>
-              </div>
-              <ul className="mt-2 list-disc pl-6 space-y-1 text-gray-700 dark:text-neutral-300">
-                {r.bullets.map((b, i) => <li key={i}>{b}</li>)}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
+      
 
-      {/* CONTACT — full-screen panel */}
+      {/* CONTACT */}
       <Section id="contact" title="Contact">
         <p>
           Email me at{" "}
@@ -143,10 +193,8 @@ export default function Home() {
           <a className="underline" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>.
         </p>
       </Section>
-
-      {/* Optional: floating back-to-top button */}
-      <BackToTop />
-      <DotNav />
+      <BackToTop/>
+      <DotNav/>
     </main>
   );
 }
