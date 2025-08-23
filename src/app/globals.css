@@ -47,3 +47,13 @@ code, pre {
                Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 a { outline-offset: 2px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* we doubled content width */
+}
+
+/* two speeds + reverse helper */
+.marquee-28 { animation: marquee 28s linear infinite; }
+.marquee-36 { animation: marquee 36s linear infinite; }
+.marquee-reverse { animation-direction: reverse; }

@@ -16,12 +16,17 @@ import HeroBG from "@/components/HeroBG";
 import ConstellationBG from "@/components/ConstellationBG";
 import About from "@/components/About";
 import ExperienceCard from "@/components/ExperienceCard";
+import Contact from "@/components/Contact";
+import Skills from "@/components/Skills";
+import SocialLinks from "@/components/SocialLinks";
+
 
 const sectionLinks = [
   { id: "about", label: "About" },
+  { id: "experience", label: "WORK Experience" },
   { id: "projects", label: "Projects" },
   { id: "publications", label: "Publications" },
-  { id: "experience", label: "Experience" },
+  { id: "skills", label: "SKILLS" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -31,11 +36,16 @@ export default function Home() {
       {/* HERO (full-screen) */}
       <motion.section
       id="hero"
+      
       className="relative snap-center min-h-[100svh] flex items-center"
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
+      {/* <SocialLinks
+        className="flex items-center gap-3 pointer-events-auto"
+        size={20}   // tweak to 22–24 if you want even bigger
+      /> */}
       {/* keep your animated background here if you added one, e.g. <HeroBG /> */}
       <ConstellationBG density={1.5} speed={1.9} connectDistance={170} dotRadius={2} lineWidth={1} />
 
@@ -88,7 +98,8 @@ export default function Home() {
             { id: "about", label: "ABOUT" },
             { id: "projects", label: "PROJECTS" },
             { id: "publications", label: "PUBLICATIONS" },
-            { id: "experience", label: "EXPERIENCE" },
+            { id: "experience", label: "WORK EXPERIENCE" },
+            { id: "skills", label: "SKILLS" },
             { id: "contact", label: "CONTACT" },
           ].map((s) => (
             <button
@@ -122,7 +133,7 @@ export default function Home() {
           {/* Work Experience */}
     <Section
         id="experience"
-        title="Experience"
+        title="Work Experience"
         className="items-center"            // ← center vertically
         containerClassName="max-w-none px-6 md:px-8" 
         titleClassName="text-lg md:text-xl mb-8"
@@ -182,17 +193,10 @@ export default function Home() {
         </ul>
       </Section>
 
-      
+      <Skills />
 
       {/* CONTACT */}
-      <Section id="contact" title="Contact">
-        <p>
-          Email me at{" "}
-          <a className="underline" href={`mailto:${links.email}`}>{links.email}</a>{" "}
-          or connect via{" "}
-          <a className="underline" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>.
-        </p>
-      </Section>
+      <Contact />
       <BackToTop/>
       <DotNav/>
     </main>

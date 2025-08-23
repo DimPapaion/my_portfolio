@@ -1,7 +1,9 @@
 "use client";
 
 import ThemeToggle from "@/components/ThemeToggle";
-import { Github, Linkedin, GraduationCap, Mail } from "lucide-react";
+import { links } from "@/data/links";
+import { SiGithub, SiLinkedin, SiGooglescholar } from "react-icons/si";
+import { MdEmail } from "react-icons/md";
 
 export default function Header() {
   return (
@@ -9,26 +11,75 @@ export default function Header() {
       <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Social icons (top-left) */}
         <div className="flex items-center gap-3 pointer-events-auto">
-          <a href="https://github.com/DimPapaion" aria-label="GitHub" target="_blank" rel="noreferrer"
-             className="p-2 rounded-full border hover:shadow transition">
-            <Github className="h-4 w-4" />
+          <a
+            href={links.github}
+            aria-label="GitHub"
+            target="_blank"
+            rel="noreferrer"
+            className="grid h-11 w-11 place-items-center rounded-full
+                       bg-white/90 text-gray-700 ring-1 ring-black/10
+                       hover:bg-black hover:text-white transition
+                       dark:bg-white/10 dark:text-neutral-200 dark:ring-white/10
+                       dark:hover:bg-white dark:hover:text-black"
+          >
+            <SiGithub size={22} />
+            <span className="sr-only">GitHub</span>
           </a>
-          <a href="https://www.linkedin.com/in/dimitrios-papaioannou-b855871a8" aria-label="LinkedIn" target="_blank" rel="noreferrer"
-             className="p-2 rounded-full border hover:shadow transition">
-            <Linkedin className="h-4 w-4" />
+
+          <a
+            href={links.linkedin}
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noreferrer"
+            className="grid h-11 w-11 place-items-center rounded-full
+                       bg-white/90 text-gray-700 ring-1 ring-black/10
+                       hover:bg-black hover:text-white transition
+                       dark:bg-white/10 dark:text-neutral-200 dark:ring-white/10
+                       dark:hover:bg-white dark:hover:text-black"
+          >
+            <SiLinkedin size={22} />
+            <span className="sr-only">LinkedIn</span>
           </a>
-          <a href="https://scholar.google.com/citations?user=fgIA2p4AAAAJ&hl=el&oi=sra" aria-label="Google Scholar" target="_blank" rel="noreferrer"
-             className="p-2 rounded-full border hover:shadow transition">
-            <GraduationCap className="h-4 w-4" />
+
+          <a
+            href={links.scholar}
+            aria-label="Google Scholar"
+            target="_blank"
+            rel="noreferrer"
+            className="grid h-11 w-11 place-items-center rounded-full
+                       bg-white/90 text-gray-700 ring-1 ring-black/10
+                       hover:bg-black hover:text-white transition
+                       dark:bg-white/10 dark:text-neutral-200 dark:ring-white/10
+                       dark:hover:bg-white dark:hover:text-black"
+          >
+            <SiGooglescholar size={22} />
+            <span className="sr-only">Google Scholar</span>
           </a>
-          <a href="mailto:dnpapaion@gmail.com" aria-label="Email"
-             className="p-2 rounded-full border hover:shadow transition">
-            <Mail className="h-4 w-4" />
+
+          <a
+            href={`mailto:${links.email}`}
+            aria-label="Email"
+            className="grid h-11 w-11 place-items-center rounded-full
+                       bg-white/90 text-gray-700 ring-1 ring-black/10
+                       hover:bg-black hover:text-white transition
+                       dark:bg-white/10 dark:text-neutral-200 dark:ring-white/10
+                       dark:hover:bg-white dark:hover:text-black"
+          >
+            <MdEmail size={22} />
+            <span className="sr-only">Email</span>
           </a>
         </div>
 
-        {/* Theme toggle (top-right) */}
-        <div className="pointer-events-auto">
+        {/* Right controls: Resume + Theme */}
+        <div className="ml-auto flex items-center gap-2 pointer-events-auto">
+          <a
+            href="/cv.pdf"
+            className="hidden sm:inline-flex items-center rounded-full px-3 py-1.5 text-sm
+                       bg-black text-white hover:opacity-90 transition
+                       dark:bg-white dark:text-black"
+          >
+            Resume
+          </a>
           <ThemeToggle />
         </div>
       </nav>
