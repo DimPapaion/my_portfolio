@@ -71,9 +71,9 @@ export default function Home() {
           <Typewriter
             lines={[
               `Hi, my name is ${links.name}.`,
-              "I love coffee.",
+              "I love to create magic from nothing.",
               "Computer Vision is my passion.",
-              "I love hiking.",
+              "Digital Era only",
             ]}
             //  className="text-5xl md:text-7xl font-extrabold tracking-tight
             //  !text-gray-900 dark:!text-gray-200 !opacity-100"
