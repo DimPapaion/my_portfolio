@@ -92,26 +92,29 @@ export default function Assistant() {
     }
 
     if (!r.ok || !j || j.error) {
+   const serverErr = j?.error ? ` (server: ${j.error.slice(0,120)})` : "";
       const ans = answerPortfolioQuestion(q);
       setMessages((m) => [
         ...m,
         {
+          
           role: "assistant",
-          text: (j?.error ? "LLM unavailable. " : "Network issue. ") + ans.text,
+          text: (j?.error ? "LLM unavailable" : "Network issue") + serverErr + ". " + ans.text,
         },
       ]);
       runAction(ans.action);
     } else {
       setMessages((m) => [...m, { role: "assistant", text: j.text ?? "" }]);
     }
-  } catch {
-    const ans = answerPortfolioQuestion(q);
-    setMessages((m) => [
-      ...m,
-      { role: "assistant", text: "Network error. " + ans.text },
-    ]);
+  } catch (e) {
+      const ans = answerPortfolioQuestion(q);
+      const msg = e instanceof Error ? e.message : String(e);
+     setMessages((m) => [
+        ...m,
+        { role: "assistant", text: `Network error: ${msg}\n` + ans.text },
+      ]);
     runAction(ans.action);
-  } finally {
+   } finally {
     setBusy(false);
   }
 }
