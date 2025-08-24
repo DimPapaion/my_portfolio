@@ -166,36 +166,53 @@ export default function Home() {
       </Section>
 
       {/* PUBLICATIONS */}
-      <Section id="publications" title="Publications">
-        <ul className="list-disc pl-6 space-y-2">
-          {publications.map((pub) => (
+     <Section id="publications" title="Publications">
+      <ul className="list-disc pl-6 space-y-2">
+        {publications.map((pub) => {
+          const byline = pub.authors ?? pub.author;
+          return (
             <motion.li
               key={`${pub.title}-${pub.year}`}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4 }}
+              // Use your foreground color in both themes
+              className="leading-relaxed text-[color:var(--foreground)]"
             >
-              {pub.authors && (
-                <span className="text-gray-600 dark:text-neutral-300">{pub.authors}. </span>
-              )}
-              <span className="font-medium italic">{pub.title}</span>
+              {/* authors (same color as everything else) */}
+              {byline && <span>{byline}. </span>}
+
+              {/* title: bold + italic to differentiate */}
+              <span className="font-semibold italic">{pub.title}</span>
+
               {" — "}
-              <span className="text-gray-700 dark:text-neutral-300">
+
+              {/* venue + year (same color) */}
+              <span>
                 {pub.venue} ({pub.year})
               </span>
+
+              {/* link (same color, just underlined) */}
               {pub.url && (
                 <>
                   {" — "}
-                  <a className="underline" target="_blank" rel="noreferrer" href={pub.url}>
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline hover:opacity-80"
+                  >
                     Link
                   </a>
                 </>
               )}
             </motion.li>
-          ))}
-        </ul>
-      </Section>
+          );
+        })}
+      </ul>
+    </Section>
+
 
       <Skills />
 
