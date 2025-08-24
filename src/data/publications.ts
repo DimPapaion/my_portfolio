@@ -1,15 +1,17 @@
 export type Pub = {
-author?: string;
-title: string;
-venue: string;
-year: string;
-url?: string;
+  authors?: string; // new
+  title: string;
+  venue: string;
+  year: string;
+  url?: string;
+  
+  author?: string;  // optional: backward-compat if some entries still use "author"
 };
 
 
 export const publications: Pub[] = [
 {
-author: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
+authors: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
 title: "Towards human society-inspired decentralized DNN inference",
 venue: "Signal Processing: Image Communication",
 year: "2025",
