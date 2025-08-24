@@ -17,6 +17,7 @@ export const experience: Role[] = [
     bullets: [
       "Research on Deep Learning applications in Blockchain systems.",
       "Authored MSc thesis; guest lecture on blockchain technologies.",
+      "Created education material for Cryptography and Blockchain Protocols",
     ],
     logo: "/logos/aiia_icon.png",
     // techIcons: ["/icons/python.svg", "/icons/pytorch.svg", "/icons/git.svg"],
@@ -27,8 +28,9 @@ export const experience: Role[] = [
     org: "AIIA Lab, Aristotle University of Thessaloniki",
     period: "Sept 2023 – Present",
     bullets: [
-      "Distributed Deep Learning & Computer Vision research.",
-      "ROS-based flood segmentation + Android GPS emergency app (TEMA).",
+      "Conducted research on Adversarial defensive strategies for robust DNN classification, real-time semantic segmentation, and decentralized DNN inference.",
+      "ROS-based flood segmentation system for real-time disaster prediction",
+      "Android GPS tracking application for emergency situations",
       "1 journal submission & 4 conference papers; Horizon TEMA deliverables.",
     ],
     logo: "/logos/aiia_icon.png",
