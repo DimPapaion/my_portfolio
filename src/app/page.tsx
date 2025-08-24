@@ -25,7 +25,7 @@ const sectionLinks = [
   { id: "about", label: "About" },
   { id: "experience", label: "WORK Experience" },
   { id: "projects", label: "Projects" },
-  { id: "publications", label: "Publications" },
+  { id: "publications", label: "Selected Publications" },
   { id: "skills", label: "SKILLS" },
   { id: "contact", label: "Contact" },
 ];
