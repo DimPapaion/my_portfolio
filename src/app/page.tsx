@@ -96,9 +96,9 @@ export default function Home() {
         >
           {[
             { id: "about", label: "ABOUT" },
+            { id: "experience", label: "WORK EXPERIENCE" },
             { id: "projects", label: "PROJECTS" },
             { id: "publications", label: "SELECTED PUBLICATIONS" },
-            { id: "experience", label: "WORK EXPERIENCE" },
             { id: "skills", label: "SKILLS" },
             { id: "contact", label: "CONTACT" },
           ].map((s) => (

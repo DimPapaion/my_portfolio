@@ -73,7 +73,7 @@ export default function Header() {
         {/* Right controls: Resume + Theme */}
         <div className="ml-auto flex items-center gap-2 pointer-events-auto">
           <a
-            href="/cv.pdf"
+            href="public/cv_v2.pdf"
             className="hidden sm:inline-flex items-center rounded-full px-3 py-1.5 text-sm
                        bg-black text-white hover:opacity-90 transition
                        dark:bg-white dark:text-black"
