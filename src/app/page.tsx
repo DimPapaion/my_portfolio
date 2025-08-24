@@ -166,7 +166,7 @@ export default function Home() {
       </Section>
 
       {/* PUBLICATIONS */}
-     <Section id="publications" title="Publications">
+     <Section id="publications" title="Selected Publications">
       <ul className="list-disc pl-6 space-y-2">
         {publications.map((pub) => {
           const byline = pub.authors ?? pub.author;
