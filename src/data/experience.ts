@@ -12,7 +12,7 @@ export type Role = {
 export const experience: Role[] = [
   {
     title: "AI Researcher",
-    org: "AIIA Lab, Aristotle University of Thessaloniki",
+    org: "CVML Group - AIIA Lab, Aristotle University of Thessaloniki",
     period: "Jan 2022 – Jan 2023",
     bullets: [
       "Research on Deep Learning applications in Blockchain systems.",
@@ -25,7 +25,7 @@ export const experience: Role[] = [
   },
   {
     title: "AI Researcher",
-    org: "AIIA Lab, Aristotle University of Thessaloniki",
+    org: "CVML Group - AIIA Lab, Aristotle University of Thessaloniki",
     period: "Sept 2023 – Present",
     bullets: [
       "Conducted research on Adversarial defensive strategies for robust DNN classification, real-time semantic segmentation, and decentralized DNN inference.",
