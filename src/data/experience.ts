@@ -31,7 +31,6 @@ export const experience: Role[] = [
       "Conducted research on Adversarial defensive strategies for robust DNN classification, real-time semantic segmentation, and decentralized DNN inference.",
       "ROS-based flood segmentation system for real-time disaster prediction",
       "Android GPS tracking application for emergency situations",
-      "1 journal submission & 4 conference papers; Horizon TEMA deliverables.",
     ],
     logo: "/logos/aiia_icon.png",
     // techIcons: ["/icons/python.svg", "/icons/tensorflow.svg", "/icons/opencv.svg"],
