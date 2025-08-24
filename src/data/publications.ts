@@ -18,23 +18,38 @@ year: "2025",
 url: "https://www.sciencedirect.com/science/article/pii/S0923596525000530",
 },
 {
-title: "Revisiting One versus One Classification for Adversarial Robustness (under review)",
+authors: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
+title: "Revisiting One versus One Classification for Adversarial Robustness (Under Review)",
 venue: "Neural Networks",
 year: "2025",
+
 },
 {
+authors: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
+title: "A Decentralized Sharding BFT Consensus Approach, for Efficient Decentralized DNN Inference Classification",
+venue: "2025 IEEE Symposium on Computers and Communications (ISCC) ",
+year: "2025",
+url: "https://zenodo.org/records/15281260"
+},
+{
+authors: "Anastasios Gerontopoulos, Dimitrios Papaioannou, Christos Papaioannidis and Ioannis Pitas",
+title: "Real-Time Flood Water Segmentation with Deep Neural Networks",
+venue: "2025 IEEE 25th International Symposium on Cluster, Cloud and Internet Computing Workshops (CCGridW)",
+year: "2025",
+url: "https://www.computer.org/csdl/proceedings-article/ccgridw/2025/093800a085/27ZLvBXjyrS"
+},
+{
+authors: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
 title: "Proof of Quality Inference (PoQI): An AI Consensus Protocol for Decentralized DNN Inference",
-venue: "IEEE ISCC 2024",
+venue: "2024 IEEE Symposium on Computers and Communications (ISCC) ",
 year: "2024",
+url: "https://doi.ieeecomputersociety.org/10.1109/ISCC61673.2024.10733731"
 },
 {
+authors: "Dimitrios Papaioannou, Vasileios Mygdalis and Ioannis Pitas",
 title: "Forest Fire Image Classification Through Decentralized DNN Inference",
 venue: "IEEE ICIP Challenges & Workshops 2024",
 year: "2024",
-},
-{
-title: "Real-Time Flood Water Segmentation with Deep Neural Networks",
-venue: "IEEE CCGrid 2025",
-year: "2025",
+url: "https://ieeexplore.ieee.org/document/10769107"
 },
 ];
