@@ -97,7 +97,7 @@ export default function Home() {
           {[
             { id: "about", label: "ABOUT" },
             { id: "projects", label: "PROJECTS" },
-            { id: "publications", label: "PUBLICATIONS" },
+            { id: "publications", label: "SELECTED PUBLICATIONS" },
             { id: "experience", label: "WORK EXPERIENCE" },
             { id: "skills", label: "SKILLS" },
             { id: "contact", label: "CONTACT" },
