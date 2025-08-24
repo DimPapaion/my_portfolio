@@ -176,7 +176,11 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4 }}
             >
-              <span className="font-medium">{pub.title}</span>{" — "}
+              {pub.authors && (
+                <span className="text-gray-600 dark:text-neutral-300">{pub.authors}. </span>
+              )}
+              <span className="font-medium italic">{pub.title}</span>
+              {" — "}
               <span className="text-gray-700 dark:text-neutral-300">
                 {pub.venue} ({pub.year})
               </span>
