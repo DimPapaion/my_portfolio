@@ -74,7 +74,7 @@ export default function Home() {
               "I work on Deep Learning with speciality on Computer Vision and Trust D-FL.",
               "Passionate about Computer Vision and 3D Graphics.",
               "I enjoy turning research into real-world AI solutions.",
-              "Let's connect and build together.!",
+              "Let's build the future of AI together.!",
             ]}
             //  className="text-5xl md:text-7xl font-extrabold tracking-tight
             //  !text-gray-900 dark:!text-gray-200 !opacity-100"

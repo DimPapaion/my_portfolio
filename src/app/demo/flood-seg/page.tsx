@@ -15,7 +15,7 @@ async function fetchSegment(file: File, signal?: AbortSignal): Promise<Blob> {
   return res.blob();
 }
 
-export default function FloodSegDemo(): JSX.Element {
+export default function FloodSegDemo() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [inputUrl, setInputUrl] = useState<string | null>(null);

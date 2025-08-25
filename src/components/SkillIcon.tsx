@@ -1,50 +1,59 @@
 "use client";
-
 import type { IconType } from "react-icons";
 import {
   SiPython, SiPytorch, SiTensorflow, SiOpencv,
-  SiDocker, SiAmazon, SiGooglecloud, SiGit,
-  SiNumpy, SiPandas, SiScikitlearn, SiOnnx, SiNvidia
+  SiDocker, SiGit, SiNumpy, SiPandas, SiScikitlearn, SiOnnx, SiNvidia,
+  SiReact, SiCplusplus, SiDotnet,
+  SiUnity, SiUnrealengine, SiOpenai, SiHuggingface,
 } from "react-icons/si";
 
-// map your 'key' to an icon component
-const ICONS: Record<string, IconType> = {
+export const ICONS: Record<string, IconType> = {
   python: SiPython,
   pytorch: SiPytorch,
   tensorflow: SiTensorflow,
   opencv: SiOpencv,
   docker: SiDocker,
-  aws: SiAmazon,
-  gcp: SiGooglecloud,
   git: SiGit,
   numpy: SiNumpy,
   pandas: SiPandas,
   sklearn: SiScikitlearn,
   onnx: SiOnnx,
   tensorrt: SiNvidia,
-  mlops: SiScikitlearn, // placeholder — swap to your preferred icon
+
+  react: SiReact,
+  cplusplus: SiCplusplus,
+  csharp: SiDotnet,     // C# → .NET icon
+  unity: SiUnity,
+  unreal: SiUnrealengine,
+
+  llms: SiOpenai,
+  openai: SiOpenai,
+  huggingface: SiHuggingface,
 };
 
-// brand-ish colors
-const COLORS: Record<string, string> = {
+export const COLORS: Record<string, string> = {
   python: "#3776AB",
   pytorch: "#EE4C2C",
   tensorflow: "#FF6F00",
   opencv: "#5C3EE8",
   docker: "#2496ED",
-  aws: "#FF9900",
-  gcp: "#4285F4",
   git: "#F05032",
   numpy: "#013243",
   pandas: "#150458",
   sklearn: "#F7931E",
   onnx: "#005CED",
   tensorrt: "#76B900",
-  mlops: "#64748B",
+  react: "#61DAFB",
+  cplusplus: "#00599C",
+  csharp: "#239120",
+  unity: "#222222",
+  unreal: "#0E1128",
+  llms: "#74AA9C",
+  openai: "#74AA9C",
+  huggingface: "#FFCC4D",
 };
 
-export default function SkillIcon({ name, size = 28 }: { name: string; size?: number }) {
-  const Ico = ICONS[name] ?? SiGit;
-  const color = COLORS[name] ?? "#64748B";
-  return <Ico size={size} style={{ color }} aria-hidden />;
+export default function SkillIcon({ keyName, className }: { keyName: string; className?: string }) {
+  const I = ICONS[keyName] ?? SiPython;       // safe fallback
+  return <I className={className} aria-hidden />;
 }
