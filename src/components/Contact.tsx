@@ -38,7 +38,7 @@ export default function Contact() {
 
         {/* Info rows */}
         {/* phone (optional) */}
-        {links.phone && (
+        {/* {links.phone && (
         <li className="flex items-center justify-center gap-3">
             <span className="grid h-9 w-9 place-items-center rounded-full
                             bg-sky-100 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">
@@ -46,7 +46,7 @@ export default function Contact() {
             </span>
             <a href={`tel:${links.phone}`} className="hover:underline">{links.phone}</a>
         </li>
-        )}
+        )} */}
 
         {/* email */}
         <li className="flex items-center justify-center gap-3">
