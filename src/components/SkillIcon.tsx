@@ -7,6 +7,7 @@ import {
   SiUnity, SiUnrealengine, SiOpenai, SiHuggingface,
 } from "react-icons/si";
 
+/* ===== icons + colors ===== */
 export const ICONS: Record<string, IconType> = {
   python: SiPython,
   pytorch: SiPytorch,
@@ -22,7 +23,7 @@ export const ICONS: Record<string, IconType> = {
 
   react: SiReact,
   cplusplus: SiCplusplus,
-  csharp: SiDotnet,     // C# → .NET icon
+  csharp: SiDotnet,       // using .NET logo for C#
   unity: SiUnity,
   unreal: SiUnrealengine,
 
@@ -43,6 +44,7 @@ export const COLORS: Record<string, string> = {
   sklearn: "#F7931E",
   onnx: "#005CED",
   tensorrt: "#76B900",
+
   react: "#61DAFB",
   cplusplus: "#00599C",
   csharp: "#239120",
@@ -53,7 +55,20 @@ export const COLORS: Record<string, string> = {
   huggingface: "#FFCC4D",
 };
 
-export default function SkillIcon({ keyName, className }: { keyName: string; className?: string }) {
-  const I = ICONS[keyName] ?? SiPython;       // safe fallback
-  return <I className={className} aria-hidden />;
+export default function SkillIcon({
+  keyName,
+  className,
+  size = 24,
+  color,
+}: {
+  keyName: string;
+  className?: string;
+  size?: number;
+  /** optional override; otherwise we pick from COLORS by key */
+  color?: string;
+}) {
+  const I = ICONS[keyName] ?? SiPython;
+  const resolved = color ?? COLORS[keyName]; // <- auto brand color
+  return <I className={className} size={size} color={resolved} aria-hidden />;
 }
+
