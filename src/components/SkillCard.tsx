@@ -16,7 +16,7 @@ export default function SkillCard({ s }: { s: Skill }) {
       <div className="flex items-start gap-3">
         <div className="grid place-items-center h-10 w-10 rounded-full
                         bg-gray-100 dark:bg-white/10 ring-1 ring-black/5 dark:ring-white/10">
-          <SkillIcon name={s.key} size={22} />
+          <SkillIcon keyName={s.key} className="h-[22px] w-[22px]" />
         </div>
         <div>
           <h4 className="text-lg font-semibold">{s.name}</h4>
