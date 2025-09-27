@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DimPapaion • Portfolio
 
-## Getting Started
+Welcome to my personal portfolio site: [dimpap.vercel.app](https://dimpap.vercel.app/)  
+This repo holds the source code for showcasing my projects, skills, and background.  
 
-First, run the development server:
+---
+
+## 🚀 Live Demo
+
+Visit the live site here:  
+**https://dimpap.vercel.app/**
+
+---
+
+## ✨ Key Features
+
+- 🎨 **Modern Portfolio Website** — Responsive, elegant design to showcase projects and experience  
+- ⚛️ **Built with Next.js & TypeScript** — Fast, reliable, and developer-friendly  
+- 📱 **Responsive Design** — Optimized for mobile, tablet, and desktop  
+- ⚡ **Deployed on Vercel** — CI/CD with every commit  
+- 🤖 **AI Guide (Gemini LLM)** — Integrated conversational assistant to guide visitors through the site, answer questions about projects, and provide context  
+
+---
+
+## 🛠 Tech Stack
+
+- **Next.js** (React Framework)  
+- **TypeScript**  
+- **Tailwind CSS / CSS Modules** (for styling)  
+- **Google Gemini LLM** (integrated as a site assistant)  
+- **Vercel** (deployment & hosting)  
+
+---
+
+## 📥 Installation & Development
+
+Clone & install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/DimPapaion/my_portfolio.git
+cd my_portfolio
+npm install
+# or yarn / pnpm install
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤖 AI Assistant (Gemini)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The site includes an integrated Gemini LLM assistant that acts as a guide for visitors:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Helps users navigate the portfolio
 
-## Learn More
+2. Provides context about projects and skills
 
-To learn more about Next.js, take a look at the following resources:
+3. Can answer general career/technical questions related to showcased work
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Makes the portfolio interactive and engaging
+---
