@@ -65,7 +65,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
 
   // --- Phrase shortcuts
   if (q.includes("cv") || q.includes("resume")) {
-    return { text: "Opening CV.", action: { type: "open", url: "public/industrial_cv.pdf" } };
+    return { text: "Opening CV.", action: { type: "open", url: "/industrial_cv.pdf" } };
   }
   if (q.includes("github")) {
     return { text: "Opening GitHub.", action: { type: "open", url: links.github } };
