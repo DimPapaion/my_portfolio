@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 
   const grounded =
   [
-    "You are a helpful assistant for Dimitrios Papaioannou’s portfolio site.",
+    "You are a helpful assistant for Dimitrios Papaioannou’s portfolio site...",
     "Use the provided site context when possible. Never request the user to paste content.",
     "Style: concise, confident, third-person when asked about Dimitrios. Prefer bullets over long paragraphs.",
     "If the question is about hiring/fit/suitability, respond with this format:\n" +
