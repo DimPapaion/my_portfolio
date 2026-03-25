@@ -11,6 +11,22 @@ export type Role = {
 
 export const experience: Role[] = [
   {
+    title: "AI Engineer (Computer Vision)",
+    org: "IKnowHow SA., Athens, Greece",
+    period: "Nov 2025 – present",
+    bullets: [
+     "Designed a semi-automated annotation pipeline using YOLO11 for bbox generation and SAM2 for mask refinement via text and bbox-guided prompts, managed dataset versioning on Roboflow",
+      "Developed and benchmarked RF-DETR and YOLO family models for leaf detection ($mAP@50: ~92\%$) and tomato ripeness classification on edge devices, authored technical report on accuracy/compute trade-offs",
+      " Implemented a vegetation index-based plant health alert system (NDVI, NDWI, NIR-derived indices) from multispectral imagery to flag disease indicators and estimate water content",
+      "Conducted greenhouse field campaigns using multispectral imaging (RGB + NIR bands) to create a novel dataset for plant disease detection and downstream classification tasks",
+      "Engineered a modular multimodal classification pipeline for RGB and multispectral imagery, improving classification accuracy from $83\%$ to up to ~$90\%$, enabling flexible experimentation with stacked-band inputs and attention-based multi-branch fusion architectures",
+      "Maintained collaborative ML workflows using Git/GitHub, managed model and dataset versioning via Hugging Face, and performed hyperparameter optimization with Optuna and experiment tracking using MLflow",
+    ],
+    logo: "/logos/ikh_icon.png",
+    // techIcons: ["/icons/python.svg", "/icons/pytorch.svg", "/icons/git.svg"],
+    accent: "blue",
+  },
+  {
     title: "AI Researcher",
     org: "CVML Group - AIIA Lab, Aristotle University of Thessaloniki",
     period: "Jan 2022 – Jan 2023",
