@@ -15,7 +15,7 @@ export type BrainAnswer = { text: string; action?: Action };
 export type QuickAction = { label: string; action: Action };
 
 export const QUICK_ACTIONS: QuickAction[] = [
-  { label: "Open CV",       action: { type: "open",   url: "/cv.pdf" } },
+  { label: "Open CV",       action: { type: "open",   url: "public/industrial_cv.pdf" } },
   { label: "Projects",      action: { type: "scroll", targetId: "projects" } },
   { label: "Experience",    action: { type: "scroll", targetId: "experience" } },
   { label: "Publications",  action: { type: "scroll", targetId: "publications" } },
@@ -25,8 +25,8 @@ export const QUICK_ACTIONS: QuickAction[] = [
 
 // Optional slash commands: "/cv", "/projects", ...
 const CMD: Record<string, Action> = {
-  cv:           { type: "open", url: "/cv.pdf" },
-  resume:       { type: "open", url: "/cv.pdf" },
+  cv:           { type: "open", url: "public/industrial_cv.pdf" },
+  resume:       { type: "open", url: "public/industrial_cv.pdf" },
   projects:     { type: "scroll", targetId: "projects" },
   experience:   { type: "scroll", targetId: "experience" },
   pubs:         { type: "scroll", targetId: "publications" },
@@ -51,7 +51,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
 
   // --- Explicit open/scroll commands
   if (/open\s+(cv|resume)/i.test(s)) {
-    return { text: "Opening CV…", action: { type: "open", url: "/cv.pdf" } };
+    return { text: "Opening CV…", action: { type: "open", url: "/industrial_cv.pdf" } };
   }
   if (/projects?/i.test(s) && /(show|open|view|go)/i.test(s)) {
     return { text: "Jumping to Projects…", action: { type: "scroll", targetId: "projects" } };
@@ -65,7 +65,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
 
   // --- Phrase shortcuts
   if (q.includes("cv") || q.includes("resume")) {
-    return { text: "Opening CV.", action: { type: "open", url: "/cv.pdf" } };
+    return { text: "Opening CV.", action: { type: "open", url: "public/industrial_cv.pdf" } };
   }
   if (q.includes("github")) {
     return { text: "Opening GitHub.", action: { type: "open", url: links.github } };
@@ -111,7 +111,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
     const text = [
       "Verdict: **Yes** — strong fit for Machine Learning Engineer roles.",
       "Why:",
-      "• Hands-on CV & production ML work (segmentation, classification, distributed/disaggregated inference).",
+      "• Hands-on CV & production ML work (segmentation, classification, distributed inference).",
       "• Evidence of research impact (publications) + delivery in real projects.",
       "• Tooling breadth (PyTorch/TensorFlow, Docker; basic cloud), practical implementations.",
       "Evidence:",
@@ -120,7 +120,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
       "• **Publications** — computer vision & efficiency topics.",
       "Next step: Open the CV or review Projects.",
     ].join("\n");
-    return { text, action: { type: "open", url: "/cv.pdf" } };
+    return { text, action: { type: "open", url: "public/industrial_cv.pdf" } };
   }
 
   // --- Generic fallback
