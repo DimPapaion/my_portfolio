@@ -15,7 +15,7 @@ export type BrainAnswer = { text: string; action?: Action };
 export type QuickAction = { label: string; action: Action };
 
 export const QUICK_ACTIONS: QuickAction[] = [
-  { label: "Open CV",       action: { type: "open",   url: "public/industrial_cv.pdf" } },
+  { label: "Open CV",       action: { type: "open",   url: "/industrial_cv.pdf" } },
   { label: "Projects",      action: { type: "scroll", targetId: "projects" } },
   { label: "Experience",    action: { type: "scroll", targetId: "experience" } },
   { label: "Publications",  action: { type: "scroll", targetId: "publications" } },
@@ -25,8 +25,8 @@ export const QUICK_ACTIONS: QuickAction[] = [
 
 // Optional slash commands: "/cv", "/projects", ...
 const CMD: Record<string, Action> = {
-  cv:           { type: "open", url: "public/industrial_cv.pdf" },
-  resume:       { type: "open", url: "public/industrial_cv.pdf" },
+  cv:           { type: "open", url: "/industrial_cv.pdf" },
+  resume:       { type: "open", url: "/industrial_cv.pdf" },
   projects:     { type: "scroll", targetId: "projects" },
   experience:   { type: "scroll", targetId: "experience" },
   pubs:         { type: "scroll", targetId: "publications" },
