@@ -120,7 +120,7 @@ export function answerPortfolioQuestion(qRaw: string): BrainAnswer {
       "• **Publications** — computer vision & efficiency topics.",
       "Next step: Open the CV or review Projects.",
     ].join("\n");
-    return { text, action: { type: "open", url: "public/industrial_cv.pdf" } };
+    return { text, action: { type: "open", url: "/industrial_cv.pdf" } };
   }
 
   // --- Generic fallback
